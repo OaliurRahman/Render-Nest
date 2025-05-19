@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RenderNest | Oaliur Rahman Siyam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --light: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #020617;
+            color: #e2e8f0;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-bg {
+            background: radial-gradient(ellipse at bottom, #1e293b 0%, #020617 100%);
+        }
+        
+        .skill-bar {
+            height: 8px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 2s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+        
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 8px rgba(99, 102, 241, 0.7);
+        }
+    </style>
+</head>
+<body class="dark:bg-slate-900">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-slate-900/80 backdrop-blur-md z-50 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold gradient-text">RenderNest</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="flex space-x-8">
+                        <a href="#about" class="text-slate-300 hover:text-white transition-all">About</a>
+                        <a href="#skills" class="text-slate-300 hover:text-white transition-all">Skills</a>
+                        <a href="#contact" class="text-slate-300 hover:text-white transition-all">Contact</a>
+                        <button id="theme-toggle" class="text-slate-300 hover:text-white transition-all">
+                            <i class="fas fa-moon dark:hidden"></i>
+                            <i class="fas fa-sun hidden dark:block"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-slate-300 hover:text-white">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800/95 backdrop-blur-md">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2 text-slate-300 hover:text-white transition-all">About</a>
+                <a href="#skills" class="block px-3 py-2 text-slate-300 hover:text-white transition-all">Skills</a>
+                <a href="#contact" class="block px-3 py-2 text-slate-300 hover:text-white transition-all">Contact</a>
+                <button id="mobile-theme-toggle" class="block px-3 py-2 text-left text-slate-300 hover:text-white transition-all">
+                    Toggle Theme <span class="ml-2"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:block"></i></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center pt-16 pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-600 rounded-full filter blur-3xl opacity-20 animate-pulse-slow"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-72 h-72 bg-indigo-600 rounded-full filter blur-3xl opacity-20 animate-pulse-slow"></div>
+            <div class="absolute top-1/3 right-1/3 w-56 h-56 bg-pink-600 rounded-full filter blur-3xl opacity-20 animate-pulse-slow"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="section">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 glow-text">Hi, I'm <span class="gradient-text">Oaliur Rahman Siyam</span></h1>
+                <p class="text-xl md:text-3xl text-slate-300 mb-12">A Multi-Skilled Creator & Digital Professional</p>
+                <a href="#skills" class="inline-block bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-8 py-4 rounded-full font-medium hover:shadow-lg hover:shadow-indigo-500/30 transition-all transform hover:scale-105">
+                    Explore My Work
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 text-center">
+            <a href="#about" class="inline-block animate-bounce">
+                <i class="fas fa-chevron-down text-2xl text-slate-400 hover:text-white transition-all"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/3">
+                    <div class="rounded-xl overflow-hidden border-2 border-slate-700 shadow-2xl hover:shadow-indigo-500/20 transition-all transform hover:-translate-y-1">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5aJEV_J6-01Uxk0x_tXyz6_VBFk-2PL61ZNqztWboIJFMHd9_u0vlJnvjM0uRzj_UShM843kPWua37wuzf36gn0w0_IE_5XzpLoPWyB-wZRFj7GyQKLFfp46sKcAxIht1wjSXZnlCup9CKMlx4Qyps21rtbKNzYty75tAjgzZ4EQWA14m5RXCK5qfToE/s320/Oaliur%20Rahman%20.png" alt="Oaliur Rahman Siyam" class="w-full h-auto">
+                    </div>
+                </div>
+                <div class="md:w-2/3">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-text">About Me</h2>
+                    <p class="text-lg text-slate-300 mb-6">
+                        I'm <span class="font-semibold text-white">Oaliur Rahman Siyam</span>, a passionate digital creator with expertise in coding, design, video editing, and digital marketing. I love solving problems and bringing creative ideas to life through innovative digital solutions.
+                    </p>
+                    <p class="text-lg text-slate-300 mb-8">
+                        With a diverse skill set and a keen eye for detail, I approach every project with enthusiasm and dedication. Whether it's developing a website, designing graphics, editing videos, or optimizing marketing campaigns, I strive for excellence in everything I do.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#contact" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all font-medium">
+                            Contact Me
+                        </a>
+                        <a href="Oaliur Rahman CV  .pdf" download class="px-6 py-3 border border-indigo-600 text-indigo-400 rounded-lg hover:bg-indigo-600/20 transition-all font-medium">
+                             Download CV
+                                         </a>
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">My Skills</h2>
+                <p class="text-lg text-slate-400 max-w-2xl mx-auto">A comprehensive showcase of my professional expertise across multiple digital domains.</p>
+            </div>
+            
+            <!-- Coding Skills -->
+            <div class="section mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-600 flex items-center justify-center mr-4">
+                        <i class="fas fa-code text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Coding Skills</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-indigo-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">HTML</span>
+                            <span class="text-indigo-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-indigo-500 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-indigo-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">CSS</span>
+                            <span class="text-indigo-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-indigo-400 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-indigo-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">JavaScript</span>
+                            <span class="text-indigo-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-indigo-500 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-indigo-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">Python</span>
+                            <span class="text-indigo-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-indigo-400 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Graphic Design -->
+            <div class="section mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600 flex items-center justify-center mr-4">
+                        <i class="fas fa-paint-brush text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Graphic Design</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-purple-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">Photopea</span>
+                            <span class="text-purple-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-purple-500 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-purple-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">Inkscape</span>
+                            <span class="text-purple-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-purple-400 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-purple-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">Adobe Lightroom</span>
+                            <span class="text-purple-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-purple-500 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-purple-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">Canva</span>
+                            <span class="text-purple-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-purple-400 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Video Editing -->
+            <div class="section mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-pink-600 flex items-center justify-center mr-4">
+                        <i class="fas fa-video text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Video Editing</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-pink-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">DaVinci Resolve</span>
+                            <span class="text-pink-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-pink-500 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-pink-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">CapCut PC</span>
+                            <span class="text-pink-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-pink-400 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Digital Marketing -->
+            <div class="section mb-16">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-600 flex items-center justify-center mr-4">
+                        <i class="fas fa-bullhorn text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Digital Marketing</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-emerald-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">Meta Marketing</span>
+                            <span class="text-emerald-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-emerald-500 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-emerald-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">Google Ads Marketing</span>
+                            <span class="text-emerald-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-emerald-400 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-emerald-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">SEO</span>
+                            <span class="text-emerald-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-emerald-500 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-emerald-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">YouTube SEO</span>
+                            <span class="text-emerald-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-emerald-400 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-emerald-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">CPA Marketing</span>
+                            <span class="text-emerald-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-emerald-500 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Other Tools -->
+            <div class="section">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-amber-600 flex items-center justify-center mr-4">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white">Other Tools</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-amber-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">Blender</span>
+                            <span class="text-amber-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-amber-500 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-amber-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">MS Word</span>
+                            <span class="text-amber-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-amber-400 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-amber-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">MS Excel</span>
+                            <span class="text-amber-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-amber-500 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 skill-card transition-all hover:border-amber-500/50">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-slate-300">PowerPoint</span>
+                            <span class="text-amber-400 font-bold">100%</span>
+                        </div>
+                        <div class="skill-bar bg-slate-700">
+                            <div class="h-full bg-amber-400 rounded" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Get In Touch</h2>
+                <p class="text-lg text-slate-400 max-w-2xl mx-auto">Have a project in mind or want to collaborate? Feel free to reach out!</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="section">
+                    <form action="https://formspree.io/f/mjkwlabd" method="POST" class="space-y-6">
+  <input type="hidden" name="_subject" value="New submission!">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-slate-300 mb-1">Your Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white placeholder-slate-500 transition-all" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-300 mb-1">Email Address</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white placeholder-slate-500 transition-all" placeholder="john@example.com">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-slate-300 mb-1">Your Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white placeholder-slate-500 transition-all" placeholder="I'd love to work with you on..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-4 rounded-lg font-medium hover:shadow-lg hover:shadow-indigo-500/30 transition-all transform hover:scale-[1.02]">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="section">
+                    <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 border border-slate-700 h-full">
+                        <h3 class="text-2xl font-bold text-white mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-lg bg-indigo-600 flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-white mb-1">Email</h4>
+                                    <p class="text-slate-400">rendernestcom@gmail.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-lg bg-indigo-600 flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-phone-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-white mb-1">Phone</h4>
+                                    <p class="text-slate-400">+880 18577-92828</p>
+                                </div>
+                            </div>
+                            
+                            <div class="pt-6">
+                                <h4 class="text-lg font-medium text-white mb-4">Follow Me</h4>
+                                <div class="flex space-x-4">
+                                    <a href="https://github.com/OaliurRahman" target="_blank" class="w-12 h-12 rounded-full bg-slate-700 hover:bg-indigo-600 flex items-center justify-center transition-all">
+                                      <i class="fab fa-github text-xl text-white"></i>
+                                              </a>
+
+                               <a href="https://www.linkedin.com/in/oaliur-rahman-19b691366/" target="_blank" class="w-12 h-12 rounded-full bg-slate-700 hover:bg-blue-600 flex items-center justify-center transition-all">
+                                      <i class="fab fa-linkedin-in text-xl text-white"></i>
+                                                </a>
+
+                                <a href="https://www.instagram.com/rendernestcom/" target="_blank" class="w-12 h-12 rounded-full bg-slate-700 hover:bg-pink-600 flex items-center justify-center transition-all">
+                                       <i class="fab fa-instagram text-xl text-white"></i>
+                                                </a>
+
+                                <a href="https://www.youtube.com/@RenderNestCom" target="_blank" class="w-12 h-12 rounded-full bg-slate-700 hover:bg-red-600 flex items-center justify-center transition-all">
+                                        <i class="fab fa-youtube text-xl text-white"></i>
+                                             </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-2xl font-bold gradient-text">RenderNest</a>
+                    <p class="text-slate-400 mt-2">© 2025 Oaliur Rahman Siyam. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#about" class="text-slate-400 hover:text-white transition-all">About</a>
+                    <a href="#skills" class="text-slate-400 hover:text-white transition-all">Skills</a>
+                    <a href="#contact" class="text-slate-400 hover:text-white transition-all">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        });
+        
+        mobileThemeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Scroll reveal animation
+        const sections = document.querySelectorAll('.section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
